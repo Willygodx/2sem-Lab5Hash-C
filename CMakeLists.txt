@@ -3,4 +3,4 @@ project(2sem-Lab5Hash-C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(2sem-Lab5Hash-C Lab3BMP/main.c Lab3BMP/functions.c Lab3BMP/functions.h)
+add_executable(2sem-Lab5Hash-C Lab5Hash/main.c Lab5Hash/functions.c Lab5Hash/functions.h)
