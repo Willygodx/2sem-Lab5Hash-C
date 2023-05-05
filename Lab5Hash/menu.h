@@ -3,6 +3,6 @@
 
 #include "functions.h"
 
-void menu(struct cacheTable cache);
+void menu(struct hash cache);
 
 #endif //LAB5HASH_MENU_H

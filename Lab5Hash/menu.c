@@ -1,7 +1,7 @@
 #include "check.h"
 #include "cache.h"
 
-void menu(struct cacheTable cache)
+void menu(struct hash cache)
 {
     char fileName[STRING_SIZE_MAX];
     int chooseButton = 0;
@@ -9,7 +9,7 @@ void menu(struct cacheTable cache)
     {
         printf("1.Find IP by domain.\n"
                "2.Find domain/domains by IP.\n"
-               "3.Print cache table.\n"
+               "3.Print cache hash.\n"
                "4.Exit\n>");
         fflush(stdin);
         checkValueForMenu(&chooseButton);

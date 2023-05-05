@@ -11,7 +11,7 @@ void pushDnsToFile(const char* fileName, char* keyDomain, char* valueIP) {
     fclose(fileDNS);
 }
 
-void readDnsFile(struct cacheTable* cache, char* fileName) {
+void readDnsFile(struct hash* cache, char* fileName) {
     char string[STRING_SIZE_MAX];
     char keyDomain[STRING_SIZE_MAX];
     char valueIP[256];
@@ -39,7 +39,7 @@ void noDomainInCache(int counter, char* fileName)
     if(counter == 0)
     {
         int chooseButton = 0;
-        printf("This domain is not found. Input: 1 - try another one domain; 2 - add new domain\n>");
+        printf("This domain is not found. Input: 1 - add new domain; 2 - try another one domain.\n>");
         checkValueOneTwo(&chooseButton);
         if(chooseButton == 1)
         {
@@ -59,14 +59,14 @@ void noDomainInCache(int counter, char* fileName)
     }
 }
 
-void findIpByDomain(struct cacheTable* cache, char* fileName)
+void findIpByDomain(struct hash* cache, char* fileName)
 {
     struct hashNode* hash;
     int counter = 0;
     int i = hashCalculate(fileName);
     while (i >= 0 && i < cache->size)
     {
-        hash = cache->table[i];
+        hash = cache->hash[i];
         while (hash != NULL)
         {
             if(strcmp(hash->keyDomain, fileName) == 0) break;
@@ -76,8 +76,8 @@ void findIpByDomain(struct cacheTable* cache, char* fileName)
         {
             if(counter == 0) printf("\n%s\n", hash->valueIP);
             counter++;
-            for(int j = i; j < cache->size - 1; j++) cache->table[j] = cache->table[j + 1];
-            cache->table[cache->size - 1] = hash;
+            for(int j = i; j < cache->size - 1; j++) cache->hash[j] = cache->hash[j + 1];
+            cache->hash[cache->size - 1] = hash;
         }
         i++;
     }

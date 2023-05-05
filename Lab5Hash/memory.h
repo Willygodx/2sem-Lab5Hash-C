@@ -4,6 +4,6 @@
 #include "functions.h"
 
 void freeHash(struct hashNode* node);
-void freeCacheTable(struct cacheTable* cache);
+void freeCacheTable(struct hash* cache);
 
 #endif //LAB5HASH_MEMORY_H

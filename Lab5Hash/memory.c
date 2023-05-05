@@ -8,17 +8,17 @@ void freeHash(struct hashNode* node) {
     }
 }
 
-void freeCacheTable(struct cacheTable* cache) {
+void freeCacheTable(struct hash* cache) {
     if (cache != NULL) {
         for (int i = 0; i < cache->size; i++) {
-            struct hashNode *hash = cache->table[i];
+            struct hashNode *hash = cache->hash[i];
             while (hash != NULL) {
                 struct hashNode *next = hash->next;
                 freeHash(hash);
                 hash = next;
             }
         }
-        free(cache->table);
+        free(cache->hash);
         free(cache);
     }
 }

@@ -15,15 +15,15 @@ struct hashNode {
     struct hashNode* next;
 };
 
-struct cacheTable {
+struct hash {
     int size;
-    struct hashNode** table;
+    struct hashNode** hash;
 };
 
 void pushDnsToFile(const char* fileName, char* keyDomain, char* valueIP);
-void readDnsFile(struct cacheTable* cache, char* fileName);
+void readDnsFile(struct hash* cache, char* fileName);
 void noDomainInCache (int counter, char* fileName);
-void findIpByDomain(struct cacheTable* cache, char* fileName);
+void findIpByDomain(struct hash* cache, char* fileName);
 void findDomainByIp(void);
 
 #endif //LAB5HASH_FUNCTIONS_H
