@@ -20,8 +20,8 @@ struct cacheTable {
     struct hashNode** table;
 };
 
-void addToFile(const char* fileName, char* keyDomain, char* valueIP);
-void readFile(struct cacheTable* cache, char* fileName);
+void pushDnsToFile(const char* fileName, char* keyDomain, char* valueIP);
+void readDnsFile(struct cacheTable* cache, char* fileName);
 void noDomainInCache (int counter, char* fileName);
 void findIpByDomain(struct cacheTable* cache, char* fileName);
 void findDomainByIp(void);

@@ -1,7 +1,7 @@
 #include "check.h"
 #include "cache.h"
 
-void addToFile(const char* fileName, char* keyDomain, char* valueIP) {
+void pushDnsToFile(const char* fileName, char* keyDomain, char* valueIP) {
     FILE* fileDNS = fopen(fileName, "a");
     if (fileDNS == NULL) {
         printf("Error: cannot open the file\n");
@@ -11,7 +11,7 @@ void addToFile(const char* fileName, char* keyDomain, char* valueIP) {
     fclose(fileDNS);
 }
 
-void readFile(struct cacheTable* cache, char* fileName) {
+void readDnsFile(struct cacheTable* cache, char* fileName) {
     char string[STRING_SIZE_MAX];
     char keyDomain[STRING_SIZE_MAX];
     char valueIP[256];
@@ -19,8 +19,8 @@ void readFile(struct cacheTable* cache, char* fileName) {
     int counter = 0;
     FILE* fileDNS = fopen("dnsList.txt", "r");
     if (fileDNS == NULL) {
-        printf("Error opening file\n");
-        return;
+        printf("Error: cannot open the file!\n");
+        exit(EXIT_FAILURE);
     }
     while (fgets(string, sizeof(string), fileDNS) != NULL)
     {
@@ -49,7 +49,7 @@ void noDomainInCache(int counter, char* fileName)
                 fflush(stdin);
                 fgets(valueIp, 16, stdin);
             } while (!checkIP(valueIp));
-            addToFile("dnsList.txt", fileName, valueIp);
+            pushDnsToFile("dnsList.txt", fileName, valueIp);
         }
         if(chooseButton == 2)
         {
@@ -83,7 +83,7 @@ void findIpByDomain(struct cacheTable* cache, char* fileName)
     }
     if(counter == 0)
     {
-        readFile(cache, fileName);
+        readDnsFile(cache, fileName);
         findIpByDomain(cache, fileName);
     }
 }
@@ -111,7 +111,6 @@ void findDomainByIp(void)
         }
         if (sscanf(string, "%255s IN CNAME %255s", keyDomain, valueIP) == 2 && strcmp(needIP, valueIP) == 0 && counter == 1)
         {
-
             printf("%s\n", keyDomain);
         }
     }
